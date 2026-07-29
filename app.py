@@ -23,6 +23,11 @@ def on_next():
     display_page()
 
 
+def go_last():
+    global current_page
+    current_page = len(paragraphs) - 1
+    display_page()
+
 def go_home():
     global current_page
     current_page = HOME_PAGE
@@ -60,6 +65,8 @@ next_button = tk.Button(root, text="Next", command=on_next)
 home_button = tk.Button(root, text="Home", command=go_home)
 
 prev_button.pack(side=tk.LEFT, padx=10)
+last_button = tk.Button(root, text="Last", command=go_last)
+last_button.pack(side=tk.LEFT, padx=10)
 home_button.pack(side=tk.LEFT, padx=10)
 next_button.pack(side=tk.RIGHT, padx=10)
 
