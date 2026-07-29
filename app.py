@@ -41,7 +41,9 @@ def display_page():
         text_widget.insert(tk.END, "Home Page\n\nWelcome to the Book App.\nClick Next to start reading.")
         prev_button.config(state=tk.DISABLED)
         next_button.config(state=tk.NORMAL if paragraphs else tk.DISABLED)
+        page_label.config(text="Page: ")
     else:
+        page_label.config(text=f"Page: {current_page + 1}/{len(paragraphs)}")
         text_widget.insert(tk.END, paragraphs[current_page])
         prev_button.config(state=tk.NORMAL)
         next_button.config(state=tk.NORMAL if current_page < len(paragraphs) - 1 else tk.DISABLED)
@@ -73,6 +75,11 @@ next_button.pack(side=tk.RIGHT, padx=10)
 # Add a Text widget to display fake text
 text_widget = tk.Text(root, height=20, width=50)
 text_widget.pack(pady=20)
+
+# Page label
+page_label = tk.Label(root, text="Page: ")
+page_label.pack()
+
 display_page()
 
 root.mainloop()
