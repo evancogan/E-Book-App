@@ -46,6 +46,8 @@ def display_page():
         prev_button.config(state=tk.DISABLED)
         next_button.config(state=tk.NORMAL if paragraphs else tk.DISABLED)
         page_label.config(text="Page: ")
+        for i, button in enumerate(chapter_buttons):
+            button.config(text=f"Chapter {i+1}", command=lambda i=i: go_to_chapter(i))
     else:
         home_frame.pack_forget()
         page_label.config(text=f"Page: {current_page + 1}/{len(paragraphs)}")
@@ -53,7 +55,7 @@ def display_page():
         prev_button.config(state=tk.NORMAL)
         next_button.config(state=tk.NORMAL if current_page < len(paragraphs) - 1 else tk.DISABLED)
 
-
+    chapter_buttons[current_page].config(relief='sunken')
 # Initialize variables
 paragraphs = [
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -72,14 +74,15 @@ button_frame.pack(pady=10)
 
 # Create buttons
 prev_button = tk.Button(button_frame, text="Prev", command=on_prev)
-last_button = tk.Button(button_frame, text="Last", command=go_last)
 home_button = tk.Button(button_frame, text="Home", command=go_home)
 next_button = tk.Button(button_frame, text="Next", command=on_next)
+last_button = tk.Button(button_frame, text="Last", command=go_last)
 
-prev_button.pack(side=tk.LEFT, padx=10)
-last_button.pack(side=tk.LEFT, padx=10)
+# Pack the buttons in the correct order
 home_button.pack(side=tk.LEFT, padx=10)
+prev_button.pack(side=tk.LEFT, padx=10)
 next_button.pack(side=tk.LEFT, padx=10)
+last_button.pack(side=tk.LEFT, padx=10)
 
 # Add a Text widget to display fake text
 text_widget = tk.Text(root, height=20, width=50)
@@ -91,9 +94,15 @@ page_label.pack()
 
 # Home page frame
 home_frame = tk.Frame(root)
-chapter_buttons = [tk.Button(home_frame, text=f"Chapter {i+1}", command=lambda i=i: go_to_chapter(i)) for i in range(len(paragraphs))]
-for button in chapter_buttons:
-    button.pack(side=tk.LEFT, padx=5)
+chapter_frame = tk.Frame(root)
+chapter_frame.pack(side=tk.TOP, pady=10)
+
+chapter_buttons = []
+for i in range(len(paragraphs)):
+    btn = tk.Button(chapter_frame, text=f"Chapter {i+1}", command=lambda i=i: go_to_chapter(i))
+    btn.config(relief='sunken')
+    btn.pack(side=tk.LEFT, padx=5)
+    chapter_buttons.append(btn)
 
 display_page()
 
