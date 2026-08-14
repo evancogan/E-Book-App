@@ -94,7 +94,7 @@ home_button = tk.Button(button_frame, text="Home", command=go_home)
 next_button = tk.Button(button_frame, text="Next", command=on_next)
 last_button = tk.Button(button_frame, text="Last", command=go_last)
 
-# Pack the buttons in the correct order
+# Pack the buttons in the correct order, the first line is the leftmost button, the subsequent lines are the buttons that follow
 home_button.pack(side=tk.LEFT, padx=10)
 prev_button.pack(side=tk.LEFT, padx=10)
 next_button.pack(side=tk.LEFT, padx=10)
