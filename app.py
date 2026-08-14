@@ -1,7 +1,16 @@
+# E-Reader App
+
+
 import tkinter as tk
 
+# The value is -1 to indicate the home page, and to refrain from displaying a page, or show content.
 HOME_PAGE = -1
 
+
+
+## BUTTON HANDLERS ##
+
+# Previous button
 def on_prev():
     global current_page
     if current_page == HOME_PAGE:
@@ -12,6 +21,7 @@ def on_prev():
         current_page = HOME_PAGE
     display_page()
 
+# Next button
 def on_next():
     global current_page
     if current_page == HOME_PAGE and paragraphs:
@@ -20,16 +30,19 @@ def on_next():
         current_page += 1
     display_page()
 
+# Last button
 def go_last():
     global current_page
     current_page = len(paragraphs) - 1
     display_page()
 
+# Home button
 def go_home():
     global current_page
     current_page = HOME_PAGE
     display_page()
 
+## NAVIGATION LOGIC ##
 def go_to_chapter(chapter):
     global current_page
     if chapter >= 0 and chapter < len(paragraphs):
@@ -38,6 +51,7 @@ def go_to_chapter(chapter):
         current_page = HOME_PAGE
     display_page()
 
+## DISPLAY LOGIC ##
 def display_page():
     text_widget.delete(1.0, tk.END)
 
@@ -56,7 +70,9 @@ def display_page():
         next_button.config(state=tk.NORMAL if current_page < len(paragraphs) - 1 else tk.DISABLED)
 
     chapter_buttons[current_page].config(relief='sunken')
-# Initialize variables
+
+# Generic text for testing
+# TODO: Implement a way to load text from a file or database
 paragraphs = [
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
@@ -64,7 +80,7 @@ paragraphs = [
 ]
 current_page = HOME_PAGE
 
-# Create the main window
+# Create the main window (Tkinter)
 root = tk.Tk()
 root.title("E-Reader App")
 
@@ -97,6 +113,7 @@ home_frame = tk.Frame(root)
 chapter_frame = tk.Frame(root)
 chapter_frame.pack(side=tk.TOP, pady=10)
 
+# Create buttons for each chapter
 chapter_buttons = []
 for i in range(len(paragraphs)):
     btn = tk.Button(chapter_frame, text=f"Chapter {i+1}", command=lambda i=i: go_to_chapter(i))
