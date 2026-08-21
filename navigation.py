@@ -1,12 +1,35 @@
 class NavigationController:
-    def __init__(self, book, update):
+    def __init__(self, book, update_callback=None):
         self.book = book
-        self.update = update
+        self.update_callback = update_callback
+        self.index = 0  # current chapter index
+
+    def set_update_callback(self, fn):
+        self.update_callback = fn
+
+    def _update(self):
+        if self.update_callback:
+            self.update_callback()
 
     def next(self):
-        self.book.next()
-        self.update()
+        if self.index < len(self.book.chapters) - 1:
+            self.index += 1
+        self._update()
 
     def prev(self):
-        self.book.prev()
-        self.update()
+        if self.index > 0:
+            self.index -= 1
+        self._update()
+
+    def home(self):
+        self.index = 0
+        self._update()
+
+    def last(self):
+        self.index = len(self.book.chapters) - 1
+        self._update()
+
+    def go_to_chapter(self, i):
+        if 0 <= i < len(self.book.chapters):
+            self.index = i
+        self._update()
