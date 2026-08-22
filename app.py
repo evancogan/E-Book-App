@@ -1,3 +1,19 @@
+"""
+app.py
+
+Entry point for the E‑Book Reader application.
+
+Responsibilities:
+- Initialize loader, renderer, navigation controller, and UI.
+- Wire components together and start the Tk mainloop.
+
+Constraints:
+- Must not contain UI layout code.
+- Must not contain business logic or model classes.
+- Must not parse EPUB files directly.
+"""
+
+
 from epub_loader import EPUBLoader
 from html_cleaner import HTMLCleaner
 from renderer import Renderer

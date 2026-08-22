@@ -1,3 +1,19 @@
+"""
+navigation.py
+
+NavigationController manages chapter navigation for the E‑Book Reader.
+
+Responsibilities:
+- Track current chapter index.
+- Provide next/prev/home/last/go_to_chapter.
+- Notify UI via update callback.
+
+Constraints:
+- Must not render text.
+- Must not contain Tkinter widgets.
+- Must not parse EPUBs.
+"""
+
 class NavigationController:
     def __init__(self, book, update_callback=None):
         self.book = book

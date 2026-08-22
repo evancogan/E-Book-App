@@ -1,3 +1,17 @@
+"""
+widgets.py
+
+Reusable Tkinter widgets for the E‑Book Reader.
+
+Responsibilities:
+- Provide custom UI components (if needed).
+
+Constraints:
+- Must not contain business logic.
+- Must not parse EPUBs.
+- Must not handle navigation.
+"""
+
 import tkinter as tk
 
 def create_nav_buttons(frame):

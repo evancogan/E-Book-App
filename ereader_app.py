@@ -1,3 +1,20 @@
+"""
+ereader_app.py
+
+Main Tkinter UI layout for the E‑Book Reader.
+
+Responsibilities:
+- Build window, frames, navigation bar, chapter sidebar, and text display.
+- Connect UI events to NavigationController.
+- Use Renderer to display cleaned chapter text.
+
+Constraints:
+- Must not parse EPUBs.
+- Must not store book/chapter data.
+- Must not implement navigation logic.
+"""
+
+
 import tkinter as tk
 from tkinter import BOTH, LEFT, RIGHT, X, Y, WORD, END
 
